@@ -745,6 +745,7 @@ a:hover {
   text-transform: uppercase;
   padding: var(--space-1) var(--space-4);
   border-radius: var(--radius-full);
+  white-space: nowrap;
 }
 
 .tier-card__name {
