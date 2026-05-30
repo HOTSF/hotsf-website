@@ -1283,3 +1283,150 @@ a:hover {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ZEFFY DONATION FORM EMBED STYLING
+   Container for inline Zeffy iframe embeds + pre-launch placeholder state.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.zeffy-embed {
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-4);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 32px oklch(from var(--color-text) l c h / 0.06);
+}
+
+.zeffy-embed__iframe {
+  display: block;
+  width: 100%;
+  min-height: 760px;
+  border: 0;
+}
+
+/* Placeholder shown while ZEFFY.live === false */
+.zeffy-embed__placeholder {
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+}
+
+.zeffy-embed__placeholder-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: oklch(from var(--color-primary) l c h / 0.12);
+  color: var(--color-primary);
+  font-size: 28px;
+  margin-bottom: var(--space-4);
+}
+
+.zeffy-embed__placeholder-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  color: var(--color-text);
+}
+
+.zeffy-embed__placeholder-text {
+  color: var(--color-text-muted);
+  max-width: 520px;
+  margin: 0 auto var(--space-4);
+  line-height: 1.7;
+}
+
+.zeffy-embed__placeholder-text:last-child { margin-bottom: 0; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   OTHER WAYS TO GIVE — Check, DAF, Stock, Workplace Match
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.give-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+.give-option {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color 220ms ease, transform 220ms ease;
+}
+
+.give-option:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.give-option__icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-primary);
+}
+
+.give-option__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0;
+}
+
+.give-option__desc {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+}
+
+.give-option__detail {
+  font-family: var(--font-mono, ui-monospace, "SF Mono", monospace);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+  background: var(--color-surface);
+  padding: var(--space-3);
+  border-radius: 6px;
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+.give-option__cta {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  margin-top: var(--space-2);
+}
+
+.give-option__cta:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Make tier cards clickable in Zeffy mode (clickable wrapper around card) */
+.tier-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 220ms ease;
+}
+
+.tier-card-link:hover .tier-card {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 24px oklch(from var(--color-primary) l c h / 0.15);
+}
+
+.tier-card-link:hover {
+  transform: translateY(-2px);
+}
+
