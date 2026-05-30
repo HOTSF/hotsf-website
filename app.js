@@ -191,19 +191,62 @@
   }
 
   /* ============================================================
-     DONATE MODAL
-     ============================================================ */
+     DONATE MODAL / ZEFFY ROUTING
+     ============================================================
+     Behavior depends on window.ZEFFY (see zeffy-config.js):
+       • If ZEFFY.live === true and a directUrl is configured → open Zeffy
+         in a new tab (preserves user's site session).
+       • Otherwise → show the existing "Coming Soon" modal.
+     Buttons can declare a frequency via data-frequency="once|monthly"
+     (defaults to "once"). Tier cards/links can supply data-amount to
+     deep-link a preset amount into the Zeffy form. */
   var donateButtons = document.querySelectorAll("[data-donate-btn]");
   var modalOverlay = document.querySelector("[data-donate-modal]");
   var modalClose = document.querySelector("[data-modal-close]");
 
-  if (donateButtons.length > 0 && modalOverlay) {
+  function openZeffyForButton(btn) {
+    if (!window.ZEFFY || !window.ZEFFY.live) return false;
+    var frequency = btn.getAttribute("data-frequency") || "once";
+    var amount = btn.getAttribute("data-amount");
+    var cfg = frequency === "monthly" ? window.ZEFFY.monthly : window.ZEFFY.oneTime;
+    if (!cfg || !cfg.directUrl || cfg.directUrl.indexOf("PLACEHOLDER") === 0) return false;
+    var url = cfg.directUrl;
+    if (amount) {
+      url += (url.indexOf("?") === -1 ? "?" : "&") + "amount=" + encodeURIComponent(amount);
+    }
+    window.open(url, "_blank", "noopener");
+    return true;
+  }
+
+  if (donateButtons.length > 0) {
     donateButtons.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.preventDefault();
-        modalOverlay.classList.add("modal-overlay--open");
-        document.body.style.overflow = "hidden";
+        if (openZeffyForButton(btn)) return;
+        // Fallback: show Coming Soon modal
+        if (modalOverlay) {
+          modalOverlay.classList.add("modal-overlay--open");
+          document.body.style.overflow = "hidden";
+        }
       });
+    });
+  }
+
+  /* Activate inline Zeffy embeds once forms are configured */
+  if (window.ZEFFY && window.ZEFFY.live) {
+    document.querySelectorAll("[data-zeffy-embed]").forEach(function (el) {
+      var key = el.getAttribute("data-zeffy-embed"); // "oneTime" or "monthly"
+      var cfg = window.ZEFFY[key];
+      if (!cfg || !cfg.embedUrl || cfg.embedUrl.indexOf("PLACEHOLDER") === 0) return;
+      var iframe = document.createElement("iframe");
+      iframe.src = cfg.embedUrl;
+      iframe.className = "zeffy-embed__iframe";
+      iframe.setAttribute("title", key === "monthly" ? "Monthly donation form" : "Donation form");
+      iframe.setAttribute("loading", "lazy");
+      iframe.setAttribute("allow", "payment");
+      // Replace placeholder content with the iframe
+      el.innerHTML = "";
+      el.appendChild(iframe);
     });
   }
 
