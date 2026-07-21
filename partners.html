@@ -28,6 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./base.css">
   <link rel="stylesheet" href="./style.css">
+  <script src="./zeffy-config.js"></script>
 </head>
 <body>
 
@@ -109,7 +110,7 @@
 
         <div class="card-grid reveal" style="grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));">
 
-          <div class="tier-card card--gold-accent">
+          <div class="tier-card card--gold-accent" data-partner-tier="supporter">
             <div class="tier-card__name">Supporter</div>
             <div class="tier-card__price">$1,000/year</div>
             <ul class="tier-card__features">
@@ -118,9 +119,10 @@
               <li>Annual certificate of partnership</li>
               <li>Brand partnership toolkit</li>
             </ul>
+            <a href="#" class="btn btn--outline tier-card__cta" data-partner-btn="supporter">Become a Supporter</a>
           </div>
 
-          <div class="tier-card card--gold-accent">
+          <div class="tier-card card--gold-accent" data-partner-tier="patron">
             <div class="tier-card__name">Patron</div>
             <div class="tier-card__price">$2,500/year</div>
             <ul class="tier-card__features">
@@ -129,9 +131,10 @@
               <li>2 social media spotlights/year</li>
               <li>Newsletter feature</li>
             </ul>
+            <a href="#" class="btn btn--outline tier-card__cta" data-partner-btn="patron">Become a Patron</a>
           </div>
 
-          <div class="tier-card card--gold-accent tier-card--featured">
+          <div class="tier-card card--gold-accent tier-card--featured" data-partner-tier="champion">
             <div class="tier-card__name">Champion</div>
             <div class="tier-card__price">$5,000/year</div>
             <ul class="tier-card__features">
@@ -141,9 +144,10 @@
               <li>Co-branded social media content</li>
               <li>Annual impact summary</li>
             </ul>
+            <a href="#" class="btn btn--primary tier-card__cta" data-partner-btn="champion">Become a Champion</a>
           </div>
 
-          <div class="tier-card card--gold-accent">
+          <div class="tier-card card--gold-accent" data-partner-tier="presenting">
             <div class="tier-card__name">Presenting Partner</div>
             <div class="tier-card__price">$10,000/year</div>
             <ul class="tier-card__features">
@@ -152,9 +156,10 @@
               <li>Co-branded marketing materials</li>
               <li>Priority placement in foundation updates</li>
             </ul>
+            <a href="#" class="btn btn--outline tier-card__cta" data-partner-btn="presenting">Become a Presenting Partner</a>
           </div>
 
-          <div class="tier-card card--gold-accent">
+          <div class="tier-card card--gold-accent" data-partner-tier="visionary">
             <div class="tier-card__name">Visionary Partner</div>
             <div class="tier-card__price">$25,000/year</div>
             <ul class="tier-card__features">
@@ -165,9 +170,10 @@
               <li>Custom co-branded content series</li>
               <li>Direct engagement with scholarship recipients</li>
             </ul>
+            <a href="#" class="btn btn--outline tier-card__cta" data-partner-btn="visionary">Become a Visionary Partner</a>
           </div>
 
-          <div class="tier-card card--gold-accent">
+          <div class="tier-card card--gold-accent" data-partner-tier="legacy">
             <div class="tier-card__name">Legacy Partner</div>
             <div class="tier-card__price">$50,000/year</div>
             <ul class="tier-card__features">
@@ -178,6 +184,16 @@
               <li>Permanent recognition on Founders Wall</li>
               <li>First access to scholar success stories &amp; testimonials</li>
             </ul>
+            <a href="#" class="btn btn--outline tier-card__cta" data-partner-btn="legacy">Become a Legacy Partner</a>
+          </div>
+        </div>
+
+        <!-- Inline notice while Zeffy partnership forms are being configured -->
+        <div class="zeffy-embed reveal" data-partner-embed="true" aria-label="Partnership signup notice">
+          <div class="zeffy-embed__placeholder">
+            <div class="zeffy-embed__placeholder-icon" aria-hidden="true">⚑</div>
+            <p class="zeffy-embed__placeholder-title">Partnership Enrollment Portal Coming Soon</p>
+            <p class="zeffy-embed__placeholder-text">Our secure online partnership enrollment is being finalized through our payment partner. In the meantime, click any tier above to reach out and reserve your Founding Partner recognition, or email <a href="mailto:admin@hotsf.org" style="color: var(--color-primary); font-weight: 600;">admin@hotsf.org</a> directly.</p>
           </div>
         </div>
       </div>
@@ -254,7 +270,7 @@
           <h2 class="section-header__title">Ready to Become a Partner?</h2>
           <p class="section-header__desc">Contact us to discuss partnership opportunities and select the tier that's right for your business.</p>
           <div style="margin-top: var(--space-6);">
-            <a href="mailto:admin@hotsf.org" class="btn btn--primary">Become a Partner</a>
+            <a href="#" class="btn btn--primary" data-partner-btn="champion">Become a Partner</a>
           </div>
         </div>
       </div>
