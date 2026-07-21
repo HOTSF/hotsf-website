@@ -1430,3 +1430,43 @@ a:hover {
   transform: translateY(-2px);
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PARTNERSHIP TIER CTA BUTTONS
+   Per-tier "Become a X" buttons on partners.html
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.tier-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.tier-card__cta {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+  font-size: var(--text-sm);
+  text-align: center;
+  width: 100%;
+  align-self: stretch;
+}
+
+/* Give tier-card__features some breathing room before the CTA */
+.tier-card__features {
+  margin-bottom: var(--space-5);
+}
+
+/* Outline button variant — used for non-featured partnership tiers */
+.btn--outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+  transition: background 220ms ease, color 220ms ease, transform 220ms ease;
+}
+
+.btn--outline:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  transform: translateY(-1px);
+}
+
