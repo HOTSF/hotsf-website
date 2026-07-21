@@ -250,6 +250,68 @@
     });
   }
 
+  /* ============================================================
+     PARTNERSHIP TIER ROUTING (partners.html)
+     ============================================================
+     Buttons decorated with data-partner-btn="<tier-key>" open the
+     tier's Zeffy Membership form when live, or fall back to a
+     pre-filled email to admin@hotsf.org with the tier in the subject.
+     Tier keys: supporter, patron, champion, presenting, visionary, legacy */
+  var TIER_LABELS = {
+    supporter:  "Supporter ($1,000/year)",
+    patron:     "Patron ($2,500/year)",
+    champion:   "Champion ($5,000/year)",
+    presenting: "Presenting Partner ($10,000/year)",
+    visionary:  "Visionary Partner ($25,000/year)",
+    legacy:     "Legacy Partner ($50,000/year)",
+  };
+
+  function openPartnerTier(tierKey) {
+    var contactEmail = (window.ZEFFY && window.ZEFFY.majorGiftEmail) || "admin@hotsf.org";
+    // Try to route to Zeffy Membership form for this tier
+    if (window.ZEFFY && window.ZEFFY.live && window.ZEFFY.partnership && window.ZEFFY.partnership[tierKey]) {
+      var cfg = window.ZEFFY.partnership[tierKey];
+      if (cfg && cfg.directUrl && cfg.directUrl.indexOf("PLACEHOLDER") !== 0) {
+        window.open(cfg.directUrl, "_blank", "noopener");
+        return;
+      }
+    }
+    // Fallback: pre-filled email
+    var label = TIER_LABELS[tierKey] || "Partnership";
+    var subject = encodeURIComponent("Partnership Inquiry \u2014 " + label);
+    var body = encodeURIComponent(
+      "Hello Hands of Time Scholars Foundation,\n\n" +
+      "I'm interested in becoming a " + label + " partner. Please send me next steps.\n\n" +
+      "Company / Organization: \n" +
+      "Primary Contact: \n" +
+      "Phone: \n\n" +
+      "Thank you."
+    );
+    window.location.href = "mailto:" + contactEmail + "?subject=" + subject + "&body=" + body;
+  }
+
+  document.querySelectorAll("[data-partner-btn]").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      var tierKey = btn.getAttribute("data-partner-btn");
+      openPartnerTier(tierKey);
+    });
+  });
+
+  /* Activate inline partnership Zeffy embed grid when live */
+  if (window.ZEFFY && window.ZEFFY.live && window.ZEFFY.partnership) {
+    var partnerEmbed = document.querySelector("[data-partner-embed]");
+    // Check if at least one tier URL is configured (not still PLACEHOLDER)
+    var anyConfigured = Object.keys(window.ZEFFY.partnership).some(function (k) {
+      var url = window.ZEFFY.partnership[k].directUrl;
+      return url && url.indexOf("PLACEHOLDER") !== 0;
+    });
+    if (partnerEmbed && anyConfigured) {
+      // Hide the "Coming Soon" placeholder once Zeffy is wired up
+      partnerEmbed.style.display = "none";
+    }
+  }
+
   if (modalClose && modalOverlay) {
     modalClose.addEventListener("click", function () {
       modalOverlay.classList.remove("modal-overlay--open");
