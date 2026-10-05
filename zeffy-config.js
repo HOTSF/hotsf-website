@@ -47,7 +47,7 @@ window.ZEFFY = {
   },
 
   // ─── Major Gifts — handled offline; "Discuss a Major Gift" button uses email
-  majorGiftEmail: 'jeremy@hotsf.org', // Will be activated once Google Workspace is live
+  majorGiftEmail: 'admin@hotsf.org',
 
   // ─── Mailing address for check donations ─────────────────────────────────
   mailingAddress: {
